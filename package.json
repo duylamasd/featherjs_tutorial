@@ -25,6 +25,7 @@
     "@feathersjs/express": "^1.2.7",
     "@feathersjs/feathers": "^3.2.3",
     "@feathersjs/socketio": "^3.2.6",
+    "async": "^2.6.1",
     "compression": "^1.7.3",
     "dotenv": "^6.1.0",
     "feathers-sequelize": "^3.1.2",
