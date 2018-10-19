@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 require('dotenv').config();
 
@@ -20,10 +20,10 @@ app.configure(express.rest());
 app.configure(socketio(io => {
     io.on('connection', socket => {
         socket.emit('news', { text: 'A new client connected!' });
-    });
-
-    io.on('healthcheck', data => {
-        console.log(data);
+        socket.on('healthcheck', data => {
+            console.log(data);
+        });
+        console.log(io);
     });
 
     // Registering Socket.io middleware
@@ -44,7 +44,6 @@ app.use('/messages', service({
 app.use(express.errorHandler());
 
 app.get('/healthcheck', (req, res) => {
-    app.io.emit('healthcheck', 'OK');
     res.send('OK');
 });
 
