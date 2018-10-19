@@ -61,13 +61,5 @@ var sequelize = new Sequelize(
     }
 );
 
-sequelize.authenticate().then(() => {
-    console.log('Connect to database successfully');
-}).catch(err => {
-    console.error('Error while connnecting to the database');
-    console.error(err);
-    process.exit(1);
-});
-
 module.exports = sequelize;
 
