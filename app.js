@@ -6,12 +6,10 @@ const feathers = require('@feathersjs/feathers');
 const express = require('@feathersjs/express');
 const compression = require('compression');
 const socketio = require('@feathersjs/socketio');
-const service = require('feathers-sequelize');
 
 const env = require('./config/environment');
 const sequelize = require('./config/database');
-
-const Message = require('./models/message');
+const services = require('./services');
 
 const app = express(feathers());
 
@@ -42,19 +40,7 @@ app.configure(socketio(io => {
     });
 }));
 
-app.use('/messages', service({
-    Model: Message,
-    paginate: {
-        default: 2,
-        max: 4
-    }
-}));
-
-const messages = app.service('messages');
-messages.on('created', (message, ctx) => {
-    console.log(`created message: ${message.text}`);
-    console.log(ctx);
-});
+services.messages(app);
 
 app.get('/healthcheck', (req, res) => {
     res.send('OK');
