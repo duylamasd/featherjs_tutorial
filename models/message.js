@@ -1,11 +1,17 @@
 'use strict';
 
 const Sequelize = require('sequelize');
-const sequelize = require('../config/database');
+const sequelize = require('../config/database').sequelize;
 
-module.exports = sequelize.define('message', {
+module.exports = sequelize.define(
+  'message',
+  {
     text: {
-        type: Sequelize.STRING,
-        allowNull: false
+      type: Sequelize.STRING,
+      allowNull: false
     }
-}, { freezeTableName: true });
+  },
+  {
+    freezeTableName: true,
+  }
+);
