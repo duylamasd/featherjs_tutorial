@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "FeathersJS Turorial API",
+    "description": "FeathersJS Tutorial API",
     "title": "Feathers Tutorial",
     "version": "v1",
     "contact": {
@@ -17,6 +17,286 @@
     "http"
   ],
   "basePath": "/",
+  "definitions": {
+    "message": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "number",
+          "example": 1,
+          "default": 1,
+          "description": "Message id"
+        },
+        "text": {
+          "type": "string",
+          "example": "Your message",
+          "default": "Your message",
+          "description": "Your message"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "user": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "userId",
+          "default": "userId"
+        },
+        "username": {
+          "type": "string",
+          "example": "username",
+          "default": "username"
+        },
+        "email": {
+          "type": "string",
+          "example": "yourmail@gmail.com",
+          "default": "yourmail@gmail.com"
+        },
+        "phone": {
+          "type": "string",
+          "example": "0123456789",
+          "default": "0123456789"
+        },
+        "profile": {
+          "type": "object",
+          "properties": {
+            "firstname": {
+              "type": "string",
+              "example": "your_first_name",
+              "default": "your_first_name"
+            },
+            "lastname": {
+              "type": "string",
+              "example": "your_last_name",
+              "default": "your_last_name"
+            },
+            "address": {
+              "type": "string",
+              "example": "your_address",
+              "default": "your_address"
+            },
+            "picture": {
+              "type": "string",
+              "example": "profile_pic_url",
+              "default": "profile_pic_url"
+            }
+          }
+        }
+      }
+    },
+    "user-with-password": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string",
+          "example": "username",
+          "default": "username"
+        },
+        "email": {
+          "type": "string",
+          "example": "yourmail@gmail.com",
+          "default": "yourmail@gmail.com"
+        },
+        "phone": {
+          "type": "string",
+          "example": "0123456789",
+          "default": "0123456789"
+        },
+        "password": {
+          "type": "string",
+          "example": "your_password",
+          "default": "your_password"
+        },
+        "profile": {
+          "type": "object",
+          "properties": {
+            "firstname": {
+              "type": "string",
+              "example": "your_first_name",
+              "default": "your_first_name"
+            },
+            "lastname": {
+              "type": "string",
+              "example": "your_last_name",
+              "default": "your_last_name"
+            },
+            "address": {
+              "type": "string",
+              "example": "your_address",
+              "default": "your_address"
+            },
+            "picture": {
+              "type": "string",
+              "example": "profile_pic_url",
+              "default": "profile_pic_url"
+            }
+          }
+        }
+      }
+    },
+    "not-found-message": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "NotFound",
+          "default": "NotFound"
+        },
+        "message": {
+          "type": "string",
+          "example": "No record found for id '1'",
+          "default": "No record found for id '1'"
+        },
+        "code": {
+          "type": "integer",
+          "example": 404,
+          "default": 404
+        },
+        "className": {
+          "type": "string",
+          "example": "not-found",
+          "default": "not-found"
+        },
+        "data": {
+          "type": "object",
+          "default": {}
+        },
+        "errors": {
+          "type": "object",
+          "default": {}
+        }
+      }
+    },
+    "unauthorized": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "NotAuthenticated",
+          "default": "NotAuthenticated"
+        },
+        "message": {
+          "type": "string",
+          "example": "Unauthorized",
+          "default": "Unauthorized"
+        },
+        "code": {
+          "type": "number",
+          "example": 401,
+          "default": 401
+        },
+        "class-name": {
+          "type": "string",
+          "example": "not-authenticated",
+          "default": "not-authenticated"
+        },
+        "data": {
+          "type": "object",
+          "default": {}
+        },
+        "errors": {
+          "type": "object",
+          "default": {}
+        }
+      }
+    },
+    "confilct": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Confilct",
+          "default": "Confilct"
+        },
+        "message": {
+          "type": "string",
+          "example": "conflicted",
+          "default": "confilcted"
+        },
+        "code": {
+          "type": "integer",
+          "example": 409,
+          "default": 409
+        },
+        "className": {
+          "type": "string",
+          "example": "conflict",
+          "default": "confilct"
+        },
+        "data": {
+          "type": "object",
+          "default": {}
+        },
+        "errors": {
+          "type": "object",
+          "default": {}
+        }
+      }
+    },
+    "bad-request": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "BadRequest",
+          "default": "BadRequest"
+        },
+        "message": {
+          "type": "string",
+          "example": "bad request",
+          "default": "bad request"
+        },
+        "code": {
+          "type": "integer",
+          "example": 400,
+          "default": 400
+        },
+        "className": {
+          "type": "string",
+          "example": "bad-request",
+          "default": "bad-request"
+        },
+        "data": {
+          "type": "object",
+          "default": {}
+        },
+        "errors": {
+          "type": "object",
+          "default": {}
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "messages",
+      "description": "Messages methods"
+    },
+    {
+      "name": "users",
+      "description": "Users methods"
+    },
+    {
+      "name": "auth",
+      "description": "Auth methods"
+    }
+  ],
+  "securityDefinitions": {
+    "jwtBearer": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
   "paths": {
     "/messages": {
       "get": {
@@ -24,21 +304,18 @@
           "messages"
         ],
         "summary": "Get messages",
-        "parameters": [
+        "security": [
           {
-            "in": "header",
-            "name": "Authorization",
-            "type": "string",
-            "default": "Bearer <your_token>",
-            "required": true,
-            "description": "The authorization header"
-          },
+            "jwtBearer": []
+          }
+        ],
+        "parameters": [
           {
             "in": "query",
             "name": "$skip",
             "type": "number",
             "description": "The skip param",
-            "default": 2
+            "default": 0
           },
           {
             "in": "query",
@@ -69,24 +346,7 @@
                 "data": {
                   "type": "array",
                   "items": {
-                    "properties": {
-                      "id": {
-                        "type": "number",
-                        "example": 1
-                      },
-                      "text": {
-                        "type": "string",
-                        "example": "example message"
-                      },
-                      "createdAt": {
-                        "type": "string",
-                        "format": "date-time"
-                      },
-                      "updatedAt": {
-                        "type": "string",
-                        "format": "date-time"
-                      }
-                    }
+                    "$ref": "#/definitions/message"
                   }
                 }
               }
@@ -95,33 +355,7 @@
           "401": {
             "description": "Unauthorized",
             "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "example": "NotAuthenticated",
-                  "default": "NotAuthenticated"
-                },
-                "message": {
-                  "type": "string",
-                  "example": "Unauthorized",
-                  "default": "Unauthorized"
-                },
-                "code": {
-                  "type": "number",
-                  "example": 401,
-                  "default": 401
-                },
-                "class-name": {
-                  "type": "string",
-                  "example": "not-authenticated",
-                  "default": "not-authenticated"
-                },
-                "errors": {
-                  "type": "object",
-                  "default": {}
-                }
-              }
+              "$ref": "#/definitions/unauthorized"
             }
           }
         }
@@ -131,6 +365,11 @@
           "messages"
         ],
         "summary": "Create new message",
+        "security": [
+          {
+            "jwtBearer": []
+          }
+        ],
         "consumes": [
           "application/json"
         ],
@@ -138,14 +377,6 @@
           "application/json"
         ],
         "parameters": [
-          {
-            "in": "header",
-            "name": "Authorization",
-            "type": "string",
-            "default": "Bearer <your_token>",
-            "required": true,
-            "description": "The authorization header"
-          },
           {
             "in": "body",
             "name": "body",
@@ -168,61 +399,13 @@
           "200": {
             "description": "Success",
             "schema": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "number",
-                  "example": 1,
-                  "default": 1,
-                  "description": "Message id"
-                },
-                "text": {
-                  "type": "string",
-                  "example": "Your message",
-                  "default": "Your message",
-                  "description": "Your message"
-                },
-                "createdAt": {
-                  "type": "string",
-                  "format": "date-time"
-                },
-                "updatedAt": {
-                  "type": "string",
-                  "format": "date-time"
-                }
-              }
+              "$ref": "#/definitions/message"
             }
           },
           "401": {
             "description": "Unauthorized",
             "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "example": "NotAuthenticated",
-                  "default": "NotAuthenticated"
-                },
-                "message": {
-                  "type": "string",
-                  "example": "Unauthorized",
-                  "default": "Unauthorized"
-                },
-                "code": {
-                  "type": "number",
-                  "example": 401,
-                  "default": 401
-                },
-                "class-name": {
-                  "type": "string",
-                  "example": "not-authenticated",
-                  "default": "not-authenticated"
-                },
-                "errors": {
-                  "type": "object",
-                  "default": {}
-                }
-              }
+              "$ref": "#/definitions/unauthorized"
             }
           }
         }
@@ -234,18 +417,15 @@
           "messages"
         ],
         "summary": "Get message by id",
+        "security": [
+          {
+            "jwtBearer": []
+          }
+        ],
         "produces": [
           "application/json"
         ],
         "parameters": [
-          {
-            "in": "header",
-            "name": "Authorization",
-            "type": "string",
-            "default": "Bearer <your_token>",
-            "required": true,
-            "description": "The authorization header"
-          },
           {
             "in": "path",
             "name": "id",
@@ -259,114 +439,19 @@
           "200": {
             "description": "Success",
             "schema": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "number",
-                  "example": 1
-                },
-                "text": {
-                  "type": "string",
-                  "example": "example message"
-                },
-                "createdAt": {
-                  "type": "string",
-                  "format": "date-time"
-                },
-                "updatedAt": {
-                  "type": "string",
-                  "format": "date-time"
-                }
-              }
+              "$ref": "#/definitions/message"
             }
           },
           "401": {
             "description": "Unauthorized",
             "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "example": "NotAuthenticated",
-                  "default": "NotAuthenticated"
-                },
-                "message": {
-                  "type": "string",
-                  "example": "Unauthorized",
-                  "default": "Unauthorized"
-                },
-                "code": {
-                  "type": "number",
-                  "example": 401,
-                  "default": 401
-                },
-                "class-name": {
-                  "type": "string",
-                  "example": "not-authenticated",
-                  "default": "not-authenticated"
-                },
-                "errors": {
-                  "type": "object",
-                  "default": {}
-                }
-              }
+              "$ref": "#/definitions/unauthorized"
             }
           },
           "404": {
             "description": "NotFound",
             "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "example": "NotFound",
-                  "default": "NotFound"
-                },
-                "message": {
-                  "type": "string",
-                  "example": "No record found for id '1'",
-                  "default": "No record found for id '1'"
-                },
-                "code": {
-                  "type": "integer",
-                  "example": 404,
-                  "default": 404
-                },
-                "className": {
-                  "type": "string",
-                  "example": "not-found",
-                  "default": "not-found"
-                },
-                "data": {
-                  "type": "object",
-                  "properties": {
-                    "name": {
-                      "type": "string",
-                      "example": "NotFound",
-                      "default": "NotFound"
-                    },
-                    "message": {
-                      "type": "string",
-                      "example": "No record found for id '1'",
-                      "default": "No record found for id '1'"
-                    },
-                    "code": {
-                      "type": "integer",
-                      "example": 404,
-                      "default": 404
-                    },
-                    "className": {
-                      "type": "string",
-                      "example": "not-found",
-                      "default": "not-found"
-                    }
-                  }
-                },
-                "errors": {
-                  "type": "object",
-                  "default": {}
-                }
-              }
+              "$ref": "#/definitions/not-found-message"
             }
           }
         }
@@ -376,18 +461,15 @@
           "messages"
         ],
         "summary": "Delete message by id",
+        "security": [
+          {
+            "jwtBearer": []
+          }
+        ],
         "produces": [
           "application/json"
         ],
         "parameters": [
-          {
-            "in": "header",
-            "name": "Authorization",
-            "type": "string",
-            "default": "Bearer <your_token>",
-            "required": true,
-            "description": "The authorization header"
-          },
           {
             "in": "path",
             "name": "id",
@@ -401,118 +483,19 @@
           "200": {
             "description": "Success",
             "schema": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "number",
-                  "example": 1,
-                  "default": 1,
-                  "description": "Message id"
-                },
-                "text": {
-                  "type": "string",
-                  "example": "Your message",
-                  "default": "Your message",
-                  "description": "Your message"
-                },
-                "createdAt": {
-                  "type": "string",
-                  "format": "date-time"
-                },
-                "updatedAt": {
-                  "type": "string",
-                  "format": "date-time"
-                }
-              }
+              "$ref": "#/definitions/message"
             }
           },
           "401": {
             "description": "Unauthorized",
             "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "example": "NotAuthenticated",
-                  "default": "NotAuthenticated"
-                },
-                "message": {
-                  "type": "string",
-                  "example": "Unauthorized",
-                  "default": "Unauthorized"
-                },
-                "code": {
-                  "type": "number",
-                  "example": 401,
-                  "default": 401
-                },
-                "class-name": {
-                  "type": "string",
-                  "example": "not-authenticated",
-                  "default": "not-authenticated"
-                },
-                "errors": {
-                  "type": "object",
-                  "default": {}
-                }
-              }
+              "$ref": "#/definitions/unauthorized"
             }
           },
           "404": {
             "description": "NotFound",
             "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "example": "NotFound",
-                  "default": "NotFound"
-                },
-                "message": {
-                  "type": "string",
-                  "example": "No record found for id '1'",
-                  "default": "No record found for id '1'"
-                },
-                "code": {
-                  "type": "integer",
-                  "example": 404,
-                  "default": 404
-                },
-                "className": {
-                  "type": "string",
-                  "example": "not-found",
-                  "default": "not-found"
-                },
-                "data": {
-                  "type": "object",
-                  "properties": {
-                    "name": {
-                      "type": "string",
-                      "example": "NotFound",
-                      "default": "NotFound"
-                    },
-                    "message": {
-                      "type": "string",
-                      "example": "No record found for id '1'",
-                      "default": "No record found for id '1'"
-                    },
-                    "code": {
-                      "type": "integer",
-                      "example": 404,
-                      "default": 404
-                    },
-                    "className": {
-                      "type": "string",
-                      "example": "not-found",
-                      "default": "not-found"
-                    }
-                  }
-                },
-                "errors": {
-                  "type": "object",
-                  "default": {}
-                }
-              }
+              "$ref": "#/definitions/not-found-message"
             }
           }
         }
@@ -522,18 +505,15 @@
           "messages"
         ],
         "summary": "Merge new message info with the old one by id",
+        "security": [
+          {
+            "jwtBearer": []
+          }
+        ],
         "produces": [
           "application/json"
         ],
         "parameters": [
-          {
-            "in": "header",
-            "name": "Authorization",
-            "type": "string",
-            "default": "Bearer <your_token>",
-            "required": true,
-            "description": "The authorization header"
-          },
           {
             "in": "path",
             "name": "id",
@@ -562,118 +542,19 @@
           "200": {
             "description": "Success",
             "schema": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "number",
-                  "example": 1,
-                  "default": 1,
-                  "description": "Message id"
-                },
-                "text": {
-                  "type": "string",
-                  "example": "Your message",
-                  "default": "Your message",
-                  "description": "Your message"
-                },
-                "createdAt": {
-                  "type": "string",
-                  "format": "date-time"
-                },
-                "updatedAt": {
-                  "type": "string",
-                  "format": "date-time"
-                }
-              }
+              "$ref": "#/definitions/message"
             }
           },
           "401": {
             "description": "Unauthorized",
             "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "example": "NotAuthenticated",
-                  "default": "NotAuthenticated"
-                },
-                "message": {
-                  "type": "string",
-                  "example": "Unauthorized",
-                  "default": "Unauthorized"
-                },
-                "code": {
-                  "type": "number",
-                  "example": 401,
-                  "default": 401
-                },
-                "class-name": {
-                  "type": "string",
-                  "example": "not-authenticated",
-                  "default": "not-authenticated"
-                },
-                "errors": {
-                  "type": "object",
-                  "default": {}
-                }
-              }
+              "$ref": "#/definitions/unauthorized"
             }
           },
           "404": {
             "description": "NotFound",
             "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "example": "NotFound",
-                  "default": "NotFound"
-                },
-                "message": {
-                  "type": "string",
-                  "example": "No record found for id '1'",
-                  "default": "No record found for id '1'"
-                },
-                "code": {
-                  "type": "integer",
-                  "example": 404,
-                  "default": 404
-                },
-                "className": {
-                  "type": "string",
-                  "example": "not-found",
-                  "default": "not-found"
-                },
-                "data": {
-                  "type": "object",
-                  "properties": {
-                    "name": {
-                      "type": "string",
-                      "example": "NotFound",
-                      "default": "NotFound"
-                    },
-                    "message": {
-                      "type": "string",
-                      "example": "No record found for id '1'",
-                      "default": "No record found for id '1'"
-                    },
-                    "code": {
-                      "type": "integer",
-                      "example": 404,
-                      "default": 404
-                    },
-                    "className": {
-                      "type": "string",
-                      "example": "not-found",
-                      "default": "not-found"
-                    }
-                  }
-                },
-                "errors": {
-                  "type": "object",
-                  "default": {}
-                }
-              }
+              "$ref": "#/definitions/not-found-message"
             }
           }
         }
@@ -683,18 +564,15 @@
           "messages"
         ],
         "summary": "Update message by id",
+        "security": [
+          {
+            "jwtBearer": []
+          }
+        ],
         "produces": [
           "application/json"
         ],
         "parameters": [
-          {
-            "in": "header",
-            "name": "Authorization",
-            "type": "string",
-            "default": "Bearer <your_token>",
-            "required": true,
-            "description": "The authorization header"
-          },
           {
             "in": "path",
             "name": "id",
@@ -723,27 +601,78 @@
           "200": {
             "description": "Success",
             "schema": {
+              "$ref": "#/definitions/message"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/unauthorized"
+            }
+          },
+          "404": {
+            "description": "NotFound",
+            "schema": {
+              "$ref": "#/definitions/not-found-message"
+            }
+          }
+        }
+      }
+    },
+    "/users": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Finds users",
+        "security": [
+          {
+            "jwtBearer": []
+          }
+        ],
+        "description": "This finds users by query",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "number",
+            "description": "The skip param",
+            "default": 0
+          },
+          {
+            "in": "query",
+            "name": "$limit",
+            "type": "number",
+            "description": "The limit param",
+            "default": 5
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
               "type": "object",
               "properties": {
-                "id": {
+                "total": {
                   "type": "number",
-                  "example": 1,
-                  "default": 1,
-                  "description": "Message id"
+                  "example": 1
                 },
-                "text": {
-                  "type": "string",
-                  "example": "Your message",
-                  "default": "Your message",
-                  "description": "Your message"
+                "skip": {
+                  "type": "number",
+                  "example": 0
                 },
-                "createdAt": {
-                  "type": "string",
-                  "format": "date-time"
+                "limit": {
+                  "type": "number",
+                  "example": 5
                 },
-                "updatedAt": {
-                  "type": "string",
-                  "format": "date-time"
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/user"
+                  }
                 }
               }
             }
@@ -751,90 +680,350 @@
           "401": {
             "description": "Unauthorized",
             "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "example": "NotAuthenticated",
-                  "default": "NotAuthenticated"
-                },
-                "message": {
-                  "type": "string",
-                  "example": "Unauthorized",
-                  "default": "Unauthorized"
-                },
-                "code": {
-                  "type": "number",
-                  "example": 401,
-                  "default": 401
-                },
-                "class-name": {
-                  "type": "string",
-                  "example": "not-authenticated",
-                  "default": "not-authenticated"
-                },
-                "errors": {
-                  "type": "object",
-                  "default": {}
-                }
-              }
+              "$ref": "#/definitions/unauthorized"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Create new user",
+        "description": "Create new user",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/user-with-password"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/message"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/unauthorized"
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "schema": {
+              "$ref": "#/definitions/confilct"
+            }
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Finds user by id",
+        "security": [
+          {
+            "jwtBearer": []
+          }
+        ],
+        "description": "Finds user by id",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "description": "The user id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/user"
+            }
+          },
+          "400": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/bad-request"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/unauthorized"
             }
           },
           "404": {
             "description": "NotFound",
             "schema": {
+              "$ref": "#/definitions/not-found-message"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Delete an user",
+        "security": [
+          {
+            "jwtBearer": []
+          }
+        ],
+        "description": "Delete an user by id",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "description": "The user id",
+            "default": "userId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/user"
+            }
+          },
+          "400": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/bad-request"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/unauthorized"
+            }
+          },
+          "404": {
+            "description": "NotFound",
+            "schema": {
+              "$ref": "#/definitions/not-found-message"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Merge an user with new record",
+        "security": [
+          {
+            "jwtBearer": []
+          }
+        ],
+        "description": "Merge an user with new record",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "description": "The user id",
+            "default": "userId"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/user-with-password"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/user"
+            }
+          },
+          "400": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/bad-request"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/unauthorized"
+            }
+          },
+          "404": {
+            "description": "NotFound",
+            "schema": {
+              "$ref": "#/definitions/not-found-message"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Replace an user with new record",
+        "security": [
+          {
+            "jwtBearer": []
+          }
+        ],
+        "description": "Replace an user with new record",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "description": "The user id",
+            "default": "userId"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/user-with-password"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/user"
+            }
+          },
+          "400": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/bad-request"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/unauthorized"
+            }
+          },
+          "404": {
+            "description": "NotFound",
+            "schema": {
+              "$ref": "#/definitions/not-found-message"
+            }
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "Login method",
+        "description": "Login method, returns bearer token",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
               "type": "object",
               "properties": {
-                "name": {
+                "user": {
                   "type": "string",
-                  "example": "NotFound",
-                  "default": "NotFound"
+                  "example": "user",
+                  "description": "username, email or phone",
+                  "default": "user"
                 },
-                "message": {
+                "password": {
                   "type": "string",
-                  "example": "No record found for id '1'",
-                  "default": "No record found for id '1'"
-                },
-                "code": {
-                  "type": "integer",
-                  "example": 404,
-                  "default": 404
-                },
-                "className": {
-                  "type": "string",
-                  "example": "not-found",
-                  "default": "not-found"
-                },
-                "data": {
-                  "type": "object",
-                  "properties": {
-                    "name": {
-                      "type": "string",
-                      "example": "NotFound",
-                      "default": "NotFound"
-                    },
-                    "message": {
-                      "type": "string",
-                      "example": "No record found for id '1'",
-                      "default": "No record found for id '1'"
-                    },
-                    "code": {
-                      "type": "integer",
-                      "example": 404,
-                      "default": 404
-                    },
-                    "className": {
-                      "type": "string",
-                      "example": "not-found",
-                      "default": "not-found"
-                    }
-                  }
-                },
-                "errors": {
-                  "type": "object",
-                  "default": {}
+                  "example": "your_password",
+                  "description": "The password",
+                  "default": "your_password"
                 }
               }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "Bearer",
+                  "default": "Bearer",
+                  "description": "Token type"
+                },
+                "token": {
+                  "type": "string",
+                  "example": "your_token",
+                  "default": "your_token",
+                  "description": "JWT token"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid user",
+            "schema": {
+              "$ref": "#/definitions/bad-request"
+            }
+          },
+          "401": {
+            "description": "Invalid password",
+            "schema": {
+              "$ref": "#/definitions/unauthorized"
             }
           }
         }
