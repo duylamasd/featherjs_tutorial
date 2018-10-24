@@ -121,21 +121,13 @@ const authenticatePassport = (strat, options) => {
       strat,
       options,
       (err, user, info) => {
-        if (err) { next(err); }
+        if (err) { next(); }
 
         if (!user) {
-          return next(new Errors[401](
-            'Unauthorized'
-          ));
+          return next();
         }
 
         req.login(user, err => {
-          if (err) {
-            return next(new Errors[401](
-              'Unauthorized'
-            ));
-          }
-
           return next();
         });
       }
@@ -143,7 +135,45 @@ const authenticatePassport = (strat, options) => {
   };
 }
 
+/**
+ * Ensure request is authenticated.
+ * @param {Request} req
+ * @param {Response} res
+ * @param {NextFunction} next
+ */
+const ensureAuthenticated = (req, res, next) => {
+  if (req.isAuthenticated()) { return next(); }
+
+  return next(new Errors[401](
+    'Unauthorized'
+  ));
+}
+
+
+/**
+ * Ensure authenticated of feathers service
+ */
+const ensureServiceAuthenticated = (hook, next) => {
+  if (hook.params.user.authenticated) {
+    return next();
+  }
+
+  return next(new Errors.NotAuthenticated('Unauthorized'));
+}
+
+/**
+ * Assign login
+ */
+const assignLogin = (req, res, next) => {
+  req.feathers.user = req.user || {};
+  req.feathers.user.authenticated = req.isAuthenticated();
+  next();
+}
+
 module.exports = {
   passport,
-  authenticatePassport
+  authenticatePassport,
+  ensureAuthenticated,
+  ensureServiceAuthenticated,
+  assignLogin
 };

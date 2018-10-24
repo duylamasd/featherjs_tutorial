@@ -2,7 +2,9 @@
 
 const service = require('feathers-sequelize');
 const Message = require('../models/message');
+const assignLogin = require('../config/passport').assignLogin;
 const authenticate = require('../config/passport').authenticatePassport;
+const ensureAuthenticated = require('../config/passport').ensureServiceAuthenticated;
 
 /**
  * Create message service.
@@ -12,6 +14,7 @@ module.exports = (app) => {
   app.use(
     '/messages',
     authenticate('jwt', { session: false }),
+    assignLogin,
     service({
       Model: Message,
       paginate: {
@@ -23,8 +26,14 @@ module.exports = (app) => {
   );
 
   const messages = app.service('messages');
+
+  messages.hooks({
+    before: {
+      all: [ensureAuthenticated]
+    }
+  });
+
   messages.on('created', (message, ctx) => {
     console.log(`created message: ${message.text}`);
-    console.log(ctx);
   });
 };

@@ -81,6 +81,7 @@ app.get('/healthcheck', (req, res) => {
 });
 app.use('/auth', auth);
 
+// Error handler
 app.use(async (err, req, res, next) => {
   let errCtx = await err.toJSON();
   if (errCtx)
