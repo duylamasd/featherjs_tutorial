@@ -6,6 +6,7 @@ const feathers = require('@feathersjs/feathers');
 const express = require('@feathersjs/express');
 const compression = require('compression');
 const socketio = require('@feathersjs/socketio');
+const swaggerUi = require('swagger-ui-express');
 
 const env = require('./config/environment');
 const sequelize = require('./config/database').sequelize;
@@ -13,6 +14,9 @@ const mongoose = require('./config/database').mongoose;
 const services = require('./services');
 const auth = require('./controllers/auth');
 const passport = require('./config/passport').passport;
+
+var swaggerDocument = require('./swagger.json');
+swaggerDocument.host = env.host;
 
 const app = express(feathers());
 
@@ -51,6 +55,8 @@ app.hooks({
     console.error(ctx.code);
   }
 });
+
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use(express.json());
 app.use(compression());

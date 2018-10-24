@@ -40,6 +40,7 @@
     "passport-local": "^1.0.0",
     "redis": "^2.8.0",
     "sequelize": "^4.39.1",
+    "swagger-editor": "^3.6.12",
     "swagger-ui-express": "^4.0.1"
   }
 }

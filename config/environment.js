@@ -13,5 +13,6 @@ module.exports = {
   mongoPort: process.env.MONGO_PORT,
   mongoDBName: process.env.MONGO_DBNAME,
   port: process.env.PORT,
-  secretKey: process.env.SECRET_KEY
+  secretKey: process.env.SECRET_KEY,
+  host: process.env.HOST
 };
