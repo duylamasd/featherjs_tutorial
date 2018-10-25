@@ -16,6 +16,11 @@ var UserSchema = new Schema({
   username: { type: String, unique: true },
   email: { type: String, unique: true },
   phone: { type: String, unique: true },
+  role: {
+    type: String,
+    enum: ['admin', 'guest'],
+    default: 'guest'
+  },
   password: String,
   profile: {
     firstname: String,

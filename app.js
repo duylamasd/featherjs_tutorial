@@ -41,6 +41,7 @@ mongoose.connect(
     connectTimeoutMS: 10000, // The MongoDB driver will wait for 10 seconds before falling.
     socketTimeoutMS: 40000, // The MongoDB driver will wait for 40 seconds before killing an inactive socket.
     useNewUrlParser: true, // Use the new parser
+    useCreateIndex: true
   }
 ).then(_ => {
   console.log('Connected to mongodb database successfully');
@@ -62,9 +63,9 @@ app.use(
   swaggerUi.setup(
     swaggerDocument,
     {
-      explorer: true,
       validatorUrl: true,
-      customCss: '.swagger-ui .topbar { display: none }'
+      customCss: '.swagger-ui .topbar { display: none }',
+      customSiteTitle: 'APIs documentation'
     }
   )
 );

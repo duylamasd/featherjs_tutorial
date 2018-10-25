@@ -88,6 +88,14 @@
           "example": "0123456789",
           "default": "0123456789"
         },
+        "role": {
+          "type": "string",
+          "enum": [
+            "guest"
+          ],
+          "example": "guest",
+          "default": "guest"
+        },
         "profile": {
           "type": "object",
           "properties": {
@@ -140,6 +148,14 @@
           "type": "string",
           "example": "0123456789",
           "default": "0123456789"
+        },
+        "role": {
+          "type": "string",
+          "enum": [
+            "guest"
+          ],
+          "example": "guest",
+          "default": "guest"
         },
         "password": {
           "type": "string",

@@ -11,6 +11,8 @@ const JwtStrategy = passportJwt.Strategy;
 const ExtractJWT = passportJwt.ExtractJwt;
 const secretKey = require('./environment').secretKey;
 
+const USER_ROLES = require('../enums').USER_ROLES;
+
 passport.serializeUser((user, done) => {
   return done(undefined, user._id);
 });
@@ -162,6 +164,28 @@ const ensureServiceAuthenticated = (hook, next) => {
 }
 
 /**
+ * Ensure user is admin
+ */
+const ensureAdmin = (ctx, next) => {
+  if (!ctx.params.user) {
+    return next(new Errors.NotAuthenticated('Not authenticated'));
+  }
+
+  if (!ctx.params.user.role) {
+    return next(new Errors.NotAuthenticated('No user role'));
+  }
+
+  if (ctx.params.user.role === USER_ROLES.ADMIN) {
+    return next();
+  }
+
+  return next(new Errors.Forbidden(
+    'User is not allowed',
+    ctx.params.user
+  ));
+}
+
+/**
  * Assign login
  */
 const assignLogin = (req, res, next) => {
@@ -173,6 +197,7 @@ const assignLogin = (req, res, next) => {
 module.exports = {
   passport,
   authenticatePassport,
+  ensureAdmin,
   ensureAuthenticated,
   ensureServiceAuthenticated,
   assignLogin

@@ -5,6 +5,7 @@ const Message = require('../models/message');
 const assignLogin = require('../config/passport').assignLogin;
 const authenticate = require('../config/passport').authenticatePassport;
 const ensureAuthenticated = require('../config/passport').ensureServiceAuthenticated;
+const ensureAdmin = require('../config/passport').ensureAdmin;
 
 /**
  * Create message service.
@@ -30,6 +31,9 @@ module.exports = (app) => {
   messages.hooks({
     before: {
       all: [ensureAuthenticated]
+    },
+    after: {
+      find: [ensureAdmin]
     }
   });
 
