@@ -22,7 +22,7 @@ const app = express(feathers());
 
 // Connect to databases
 sequelize.authenticate().then(() => {
-  console.log('Connect to mysql database successfully');
+  console.log('Connected to mysql database successfully');
 }).catch(err => {
   console.error('Error while connnecting to the mysql database');
   console.error(err);
@@ -43,7 +43,7 @@ mongoose.connect(
     useNewUrlParser: true, // Use the new parser
   }
 ).then(_ => {
-  console.log('Connect to mongodb database successfully');
+  console.log('Connected to mongodb database successfully');
 }).catch(err => {
   console.error('Mongoose connection failed');
   console.error(err);
@@ -56,7 +56,18 @@ app.hooks({
   }
 });
 
-app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use(
+  '/docs',
+  swaggerUi.serve,
+  swaggerUi.setup(
+    swaggerDocument,
+    {
+      explorer: true,
+      validatorUrl: true,
+      customCss: '.swagger-ui .topbar { display: none }'
+    }
+  )
+);
 
 app.use(express.json());
 app.use(compression());

@@ -3,12 +3,13 @@
   "info": {
     "description": "FeathersJS Tutorial API",
     "title": "Feathers Tutorial",
-    "version": "v1",
+    "version": "1.0",
     "contact": {
       "email": "duylamasd@gmail.com"
     },
     "license": {
-      "name": "MIT"
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
     }
   },
   "host": "localhost:3000",
@@ -17,6 +18,27 @@
     "http"
   ],
   "basePath": "/",
+  "tags": [
+    {
+      "name": "messages",
+      "description": "Messages methods"
+    },
+    {
+      "name": "users",
+      "description": "Users methods"
+    },
+    {
+      "name": "auth",
+      "description": "Auth methods"
+    }
+  ],
+  "securityDefinitions": {
+    "jwtBearer": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
   "definitions": {
     "message": {
       "type": "object",
@@ -79,6 +101,14 @@
               "example": "your_last_name",
               "default": "your_last_name"
             },
+            "gender": {
+              "type": "string",
+              "enum": [
+                "Male",
+                "Female"
+              ],
+              "default": "Male"
+            },
             "address": {
               "type": "string",
               "example": "your_address",
@@ -128,6 +158,14 @@
               "type": "string",
               "example": "your_last_name",
               "default": "your_last_name"
+            },
+            "gender": {
+              "type": "string",
+              "enum": [
+                "Male",
+                "Female"
+              ],
+              "default": "Male"
             },
             "address": {
               "type": "string",
@@ -274,27 +312,6 @@
           "default": {}
         }
       }
-    }
-  },
-  "tags": [
-    {
-      "name": "messages",
-      "description": "Messages methods"
-    },
-    {
-      "name": "users",
-      "description": "Users methods"
-    },
-    {
-      "name": "auth",
-      "description": "Auth methods"
-    }
-  ],
-  "securityDefinitions": {
-    "jwtBearer": {
-      "type": "apiKey",
-      "name": "Authorization",
-      "in": "header"
     }
   },
   "paths": {
