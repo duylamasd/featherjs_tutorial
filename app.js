@@ -114,6 +114,6 @@ app.use(async (err, req, res, next) => {
 });
 
 app.listen(env.port).on('listening', () => {
-  cronTicker .start();
+  cronTicker.start();
   console.log(`Listening at port ${env.port}`);
 });
