@@ -15,10 +15,14 @@ const services = require('./services');
 const auth = require('./controllers/auth');
 const passport = require('./config/passport').passport;
 
+const cronTicker = require('./cronjobs').ticker;
+
 var swaggerDocument = require('./swagger.json');
 swaggerDocument.host = env.host;
 
 const app = express(feathers());
+
+var cron =
 
 // Connect to databases
 sequelize.authenticate().then(() => {
@@ -113,5 +117,6 @@ app.use(async (err, req, res, next) => {
 });
 
 app.listen(env.port).on('listening', () => {
+  cronTicker.start();
   console.log(`Listening at port ${env.port}`);
 });
